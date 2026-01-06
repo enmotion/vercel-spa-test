@@ -1,0 +1,198 @@
+@import url("//at.alicdn.com/t/c/font_4806839_9a17pnkip8.css");
+/* vmo-base */
+/* @import url('./base.css'); */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* dom 中心位置 */
+.ofc {
+  object-fit: cover;
+}
+
+.ct-sca {
+  position: relative;
+  box-sizing: content-box;
+  width: 100%;
+  /*background-color: #000000;*/
+}
+
+.ct-cover {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.sca1x1 {
+  padding-bottom: 100%;
+}
+
+.sca1x4 {
+  padding-bottom: 25%;
+}
+
+.sca5x1 {
+  padding-bottom: 500%;
+}
+
+.sca16x9 {
+  padding-bottom: 56.25%;
+}
+
+.sca2x1 {
+  padding-bottom: 50%;
+}
+
+.sca9x16 {
+  padding-bottom: 178%;
+}
+
+.sca4x3 {
+  padding-bottom: 75%;
+}
+
+.sca3x4 {
+  padding-bottom: 133%;
+}
+
+.c-sca {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cu-progress.striped {
+  background-image: linear-gradient(45deg,
+      rgba(255, 255, 255, 0.15) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.15) 50%,
+      rgba(255, 255, 255, 0.15) 75%,
+      transparent 75%,
+      transparent);
+  background-size: 36px 36px;
+}
+
+.cu-progress.striped1 {
+  background-image: linear-gradient(45deg,
+      rgba(255, 255, 255, 0.1) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.1) 75%,
+      transparent 75%,
+      transparent);
+  background-size: 36px 36px;
+}
+
+.cu-progress.striped2 {
+  background-image: linear-gradient(45deg,
+      rgba(255, 255, 255, 0.05) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.05) 75%,
+      transparent 75%,
+      transparent);
+  background-size: 36px 36px;
+}
+
+.cu-progress.striped3 {
+  background-image: linear-gradient(45deg,
+      rgba(255, 255, 255, 0.02) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.02) 50%,
+      rgba(255, 255, 255, 0.02) 75%,
+      transparent 75%,
+      transparent);
+  background-size: 36px 36px;
+}
+
+.cu-progress.active {
+  animation: progress-stripes 1.5s linear infinite;
+}
+
+/* 保持暗色模式的配置 */
+.el-keep-dark {
+  color-scheme: dark;
+  --el-box-shadow:
+    0px 12px 32px 4px rgba(0, 0, 0, 0.36), 0px 8px 20px rgba(0, 0, 0, 0.72);
+  --el-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.72);
+  --el-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, 0.72);
+  --el-box-shadow-dark:
+    0px 16px 48px 16px rgba(0, 0, 0, 0.72), 0px 12px 32px #000000,
+    0px 8px 16px -8px #000000;
+  --el-bg-color-page: #0a0a0a;
+  --el-bg-color: #141414;
+  --el-bg-color-overlay: #1d1e1f;
+  --el-text-color-primary: #e5eaf3;
+  --el-text-color-regular: #cfd3dc;
+  --el-text-color-secondary: #a3a6ad;
+  --el-text-color-placeholder: #8d9095;
+  --el-text-color-disabled: #6c6e72;
+  --el-border-color-darker: #636466;
+  --el-border-color-dark: #58585b;
+  --el-border-color: #4c4d4f;
+  --el-border-color-light: #414243;
+  --el-border-color-lighter: #363637;
+  --el-border-color-extra-light: #2b2b2c;
+  --el-fill-color-darker: #424243;
+  --el-fill-color-dark: #39393a;
+  --el-fill-color: #303030;
+  --el-fill-color-light: #262727;
+  --el-fill-color-lighter: #1d1d1d;
+  --el-fill-color-extra-light: #191919;
+  --el-fill-color-blank: transparent;
+  --el-mask-color: rgba(0, 0, 0, 0.8);
+  --el-mask-color-extra-light: rgba(0, 0, 0, 0.3);
+}
+
+/* 保持亮色模式的配置 */
+.el-keep-light {
+  color-scheme: light;
+  --el-bg-color: #ffffff;
+  --el-bg-color-page: #f2f3f5;
+  --el-bg-color-overlay: #ffffff;
+  --el-text-color-primary: #303133;
+  --el-text-color-regular: #606266;
+  --el-text-color-secondary: #909399;
+  --el-text-color-placeholder: #a8abb2;
+  --el-text-color-disabled: #c0c4cc;
+  --el-border-color: #dcdfe6;
+  --el-border-color-light: #e4e7ed;
+  --el-border-color-lighter: #ebeef5;
+  --el-border-color-extra-light: #f2f6fc;
+  --el-border-color-dark: #d4d7de;
+  --el-border-color-darker: #cdd0d6;
+  --el-fill-color: #f0f2f5;
+  --el-fill-color-light: #f5f7fa;
+  --el-fill-color-lighter: #fafafa;
+  --el-fill-color-extra-light: #fafcff;
+  --el-fill-color-dark: #ebedf0;
+  --el-fill-color-darker: #e6e8eb;
+  --el-fill-color-blank: #ffffff;
+  --el-box-shadow:
+    0px 12px 32px 4px rgba(0, 0, 0, 0.04), 0px 8px 20px rgba(0, 0, 0, 0.08);
+  --el-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  --el-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, 0.12);
+  --el-box-shadow-dark:
+    0px 16px 48px 16px rgba(0, 0, 0, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.12),
+    0px 8px 16px -8px rgba(0, 0, 0, 0.16);
+  /* --el-disabled-bg-color: var(--el-fill-color-light); */
+  --el-disabled-text-color: var(--el-text-color-placeholder);
+  --el-disabled-border-color: var(--el-border-color-light);
+  --el-overlay-color: rgba(0, 0, 0, 0.8);
+  --el-overlay-color-light: rgba(0, 0, 0, 0.7);
+  --el-overlay-color-lighter: rgba(0, 0, 0, 0.5);
+  --el-mask-color: rgba(255, 255, 255, 0.9);
+  --el-mask-color-extra-light: rgba(255, 255, 255, 0.3);
+  --el-border-width: 1px;
+  --el-border-style: solid;
+  --el-border-color-hover: var(--el-text-color-disabled);
+  --el-border: var(--el-border-width) var(--el-border-style) var(--el-border-color);
+  --el-svg-monochrome-grey: var(--el-border-color);
+}
