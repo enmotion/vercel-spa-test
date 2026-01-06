@@ -13,7 +13,7 @@ const router: VmoRouteRecordRaw<RouteMeta> = {
 	path: "/theme-pg",
 	meta: {
 		keepAlive: true,
-		tokenRequire: true,
+		tokenRequire: false,
 		pageName: "serre",
 		avoidPushToTag: false,
 		powerRequire: [],

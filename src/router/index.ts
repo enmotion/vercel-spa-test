@@ -34,7 +34,7 @@ export function initRouter() {
 	const router = createRouter<RouteMeta>(
 		{
 			history: createWebHashHistory(), // 同 vue-router
-			routes: [mergeAll([PGS.MainPg, { children: [PGS.DashboardPg, PGS.ThemePg] }]), PGS.LoginPg, PGS.Erro403Pg, PGS.Erro404Pg],
+			routes: [mergeAll([PGS.MainPg, { children: [PGS.DashboardPg, PGS.ThemePg, PGS.TweenNumberPg] }]), PGS.LoginPg, PGS.Erro403Pg, PGS.Erro404Pg],
 		},
 		PGS, // 模板池 基于 loadPageTemplateByImport 方法创建
 		routeStore, // 路由全局状态管理器
