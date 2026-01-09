@@ -3,10 +3,12 @@ import type { ApiRecord } from "vmo-umi-request";
 const api: ApiRecord<string> = {
 	usersPubRegister: {
 		name: "用户注册",
-		url: "/users/pub/register",
+		// url: "/users/pub/register",
+		url:"/health",
 		// axios 配置
 		requestConfig: {
-			method: "POST",
+			// method: "POST",
+			method:"GET",
 			middle:"/pub/"
 			// headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		},
