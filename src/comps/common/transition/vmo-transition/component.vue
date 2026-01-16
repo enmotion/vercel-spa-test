@@ -150,7 +150,7 @@ export default defineComponent({
 		function enter(el: Element, done: Function) {
 			// nextTick 是一个补救方法，弥补之前的首次动画播放时，闪动的问题, 之后再待验证
 			nextTick(() => {
-				console.log(orgSize.value.height, "orgSize.value.height");
+				// console.log(orgSize.value.height, "orgSize.value.height");
 				isAimating.value = false;
 				orgSize.value.height = slotSizeWrap.value.offsetHeight + "px";
 				orgSize.value.width = slotSizeWrap.value.offsetWidth + "px";

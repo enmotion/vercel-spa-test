@@ -49,7 +49,7 @@
 			:size="appStore.getScreen.isWideScreen?computedCurrentDrawerFormProps?.drawer?.size:'100%'"
 		>
 			<div class="flex-col grow-1">
-				<!-- {{ itemData }} -->
+				{{ itemData }} 
 				<vmo-x-form ref="formRef"
 					v-model="itemData"
 					class="grow-1 flex-col"

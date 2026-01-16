@@ -9,18 +9,18 @@
 				:model="reqdata"
 			>
 				<el-form-item
-					:prop="formJson.username.key"
-					:rules="formJson.username.rules"
+					:prop="formJson.name.key"
+					:rules="formJson.name.rules"
 					class="my-0 mb-10 last:mb-0"
 				>
 					<el-input
-						v-model="reqdata[formJson.username.key]"
-						:type="formJson.username.type"
-						:size="formJson.username.size"
-						:placeholder="formJson.username.placeholder"
+						v-model="reqdata[formJson.name.key]"
+						:type="formJson.name.type"
+						:size="formJson.name.size"
+						:placeholder="formJson.name.placeholder"
 					>
 						<template #prefix>
-							<span :class="['iconfont', formJson.username.icon]"></span>
+							<span :class="['iconfont', formJson.name.icon]"></span>
 						</template>
 					</el-input>
 				</el-form-item>
@@ -95,8 +95,8 @@ export default defineComponent({
 		const reqdata = ref({} as any);
 		const ReqDataFormRef = ref(null as any);
 		const formJson = ref({
-			username: {
-				key: "username",
+			name: {
+				key: "name",
 				type: "text",
 				icon: "vmo-icon-user",
 				placeholder: "登录账户",

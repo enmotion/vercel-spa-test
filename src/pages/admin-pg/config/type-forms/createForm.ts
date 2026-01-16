@@ -15,7 +15,7 @@ export default {
 		},
 		elementsWatcher: async function (state, ui:Record<string,any>, beforeUpdateStateKeyMap) {
 			const vm = this as any
-			if(userStore.getInfo.uid == vm.computedLevelData?.uid ){
+			if(userStore.getInfo._id == vm.computedLevelData?._id ){
 				ui['status'].disabled = true
 			}
 			ui['super'].props.max = userStore.getInfo.super??0;
@@ -116,10 +116,10 @@ export default {
 					},
 					rules: {
 						required: true,
-						trigger: "blur",
+						trigger: ["blur"],
 						validator:function(rule,value,cb){
 							if(!!value){
-								request(apis.usersUniq,{nickname:value,uid:this.$formData.uid},{}).then(res=>{
+								request(apis.usersUniq,{nickname:value,_id:this.$formData._id},{}).then(res=>{
 									if(res?.data?.total==0){
 										cb()
 									}else{
@@ -162,7 +162,7 @@ export default {
 						trigger: ["change", "blur"],
 						validator:function(rule,value,cb){
 							if(!!value){
-								request(apis.usersUniq,{username:value,uid:this.$formData.uid},{}).then(res=>{
+								request(apis.usersUniq,{username:value,_id:this.$formData._id},{}).then(res=>{
 									if(res?.data?.total==0){
 										cb()
 									}else{
@@ -204,7 +204,6 @@ export default {
 						required: false,
 						trigger: ["change", "blur"],
 						validator(rule, value, callback) {
-							console.error(value);
 							const regexp = /^.{6,18}$/;
 							if (regexp.test(value)) {
 								callback();
@@ -245,25 +244,25 @@ export default {
 					rules: {
 						required: false,
 						trigger: ["change", "blur"],
-						validator(rule, value, callback) {
-							const regexp = /^1[3-9]\d{9}$/;
-							if (!value || regexp.test(value)) {
-							if(!!value){
-									request(apis.usersUniq,{phone:value,uid:this.$formData.uid},{}).then(res=>{
-										console.warn(res)
-										if(res?.data?.total==0){
-											callback()
-										}else{
-											callback("该手机号码已经被占用")
-										}
-									})
-								}else{
-									callback("请输入手机号码")
-								}
-							} else {
-								callback(new Error("请输入正确手机号"));
-							}
-						},
+						// validator(rule, value, callback) {
+						// 	const regexp = /^1[3-9]\d{9}$/;
+						// 	if (!value || regexp.test(value)) {
+						// 	if(!!value){
+						// 			request(apis.usersUniq,{phone:value,_id:this.$formData._id},{}).then(res=>{
+						// 				console.warn(res)
+						// 				if(res?.data?.total==0){
+						// 					callback()
+						// 				}else{
+						// 					callback("该手机号码已经被占用")
+						// 				}
+						// 			})
+						// 		}else{
+						// 			callback("请输入手机号码")
+						// 		}
+						// 	} else {
+						// 		callback(new Error("请输入正确手机号"));
+						// 	}
+						// },
 						message: "请输入用户手机",
 					},
 				},
@@ -294,20 +293,20 @@ export default {
 					rules: {
 						required: false,
 						trigger: ["change", "blur"],
-						validator(rule, value, callback) {
-							const regexp = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-							if (!value || regexp.test(value)) {
-								request(apis.usersUniq,{email:value,uid:this.$formData.uid},{}).then(res=>{
-									if(res?.data?.total==0){
-										callback()
-									}else{
-										callback("该邮箱已经被占用")
-									}
-								})
-							} else {
-								callback(new Error("请输入正确用户邮箱"));
-							}
-						},
+						// validator(rule, value, callback) {
+						// 	const regexp = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+						// 	if (!value || regexp.test(value)) {
+						// 		request(apis.usersUniq,{email:value,_id:this.$formData._id},{}).then(res=>{
+						// 			if(res?.data?.total==0){
+						// 				callback()
+						// 			}else{
+						// 				callback("该邮箱已经被占用")
+						// 			}
+						// 		})
+						// 	} else {
+						// 		callback(new Error("请输入正确用户邮箱"));
+						// 	}
+						// },
 						message: "请输入用户邮箱",
 					},
 				},
