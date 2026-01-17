@@ -44,7 +44,7 @@ const options: OptionButton[] = [
 					message: `您确定要删除用户 [ ${row.username} ] 吗`,
 				})
 				.then(() => {
-					proxy.$request(proxy.$apis.userDelete, { uid: row.uid }).then((res: any) => {
+					proxy.$request(proxy.$apis.userDelete, { _id: row._id }).then((res: any) => {
 						if (res.code == 200) {
 							proxy.$parent.query();
 							proxy.$message({
@@ -78,14 +78,14 @@ export function topOptions(proxy:any):BatchButton[]{
 			disabled:proxy.selection.length==0,			
 			action: (selected, proxy) => {
 				console.log(selected,proxy,'111113')
-				const selectedUid = selected.map((item: Record<string, any>) => item.uid);
+				const selected_id = selected.map((item: Record<string, any>) => item._id);
 				proxy
 					.$confirm({
 						title: "操作警告",
-						message: `您确定要删除所选的 [ ${selectedUid.length} ] 个用户吗`,
+						message: `您确定要删除所选的 [ ${selected_id.length} ] 个用户吗`,
 					})
 					.then(() => {
-						proxy.$request(proxy.$apis.userDelete, { uid: selectedUid.join(",") }).then((res: any) => {
+						proxy.$request(proxy.$apis.userDelete, { _id: selected_id.join(",") }).then((res: any) => {
 							if (res.code == 200) {
 								proxy.$parent.query();
 								proxy.$message({
@@ -110,14 +110,14 @@ export function topOptions(proxy:any):BatchButton[]{
 			disabled:proxy.selection.length==0,
 			action: (selected, proxy) => {
 				console.log(selected,proxy,'111113')
-				const selectedUid = selected.map((item: Record<string, any>) => item.uid);
+				const selected_id = selected.map((item: Record<string, any>) => item._id);
 				proxy
 					.$confirm({
 						title: "操作警告",
-						message: `您确定要禁用所选的 [ ${selectedUid.length} ] 个用户吗`,
+						message: `您确定要禁用所选的 [ ${selected_id.length} ] 个用户吗`,
 					})
 					.then(() => {
-						proxy.$request(proxy.$apis.usersUpdateMany, { uid: selectedUid, status: false }).then((res: any) => {
+						proxy.$request(proxy.$apis.usersUpdateMany, { _id: selected_id, status: false }).then((res: any) => {
 							if (res.code == 200) {
 								proxy.$parent.query();
 								proxy.$message({
@@ -142,14 +142,14 @@ export function topOptions(proxy:any):BatchButton[]{
 			label: "批量启用",
 			disabled:proxy.selection.length==0,
 			action: (selected, proxy) => {
-				const selectedUid = selected.map((item: Record<string, any>) => item.uid);
+				const selected_id = selected.map((item: Record<string, any>) => item._id);
 				proxy
 					.$confirm({
 						title: "操作警告",
-						message: `您确定要启用所选的 [ ${selectedUid.length} ] 个用户吗`,
+						message: `您确定要启用所选的 [ ${selected_id.length} ] 个用户吗`,
 					})
 					.then(() => {
-						proxy.$request(proxy.$apis.usersUpdateMany, { uid: selectedUid, status: true }).then((res: any) => {
+						proxy.$request(proxy.$apis.usersUpdateMany, { _id: selected_id, status: true }).then((res: any) => {
 							if (res.code == 200) {
 								proxy.$parent.query();
 								proxy.$message({
@@ -178,14 +178,14 @@ export function topOptions(proxy:any):BatchButton[]{
 // 		label: "批量删除",
 // 		action: (selected, proxy) => {
 // 			console.log(selected,proxy,'111113')
-// 			const selectedUid = selected.map((item: Record<string, any>) => item.uid);
+// 			const selected_id = selected.map((item: Record<string, any>) => item._id);
 // 			proxy
 // 				.$confirm({
 // 					title: "操作警告",
-// 					message: `您确定要删除所选的 [ ${selectedUid.length} ] 个用户吗`,
+// 					message: `您确定要删除所选的 [ ${selected_id.length} ] 个用户吗`,
 // 				})
 // 				.then(() => {
-// 					proxy.$request(proxy.$apis.userDelete, { uid: selectedUid.join(",") }).then((res: any) => {
+// 					proxy.$request(proxy.$apis.userDelete, { _id: selected_id.join(",") }).then((res: any) => {
 // 						if (res.code == 200) {
 // 							proxy.$parent.query();
 // 							proxy.$message({
@@ -209,14 +209,14 @@ export function topOptions(proxy:any):BatchButton[]{
 // 		label: "批量禁用",
 // 		action: (selected, proxy) => {
 // 			console.log(selected,proxy,'111113')
-// 			const selectedUid = selected.map((item: Record<string, any>) => item.uid);
+// 			const selected_id = selected.map((item: Record<string, any>) => item._id);
 // 			proxy
 // 				.$confirm({
 // 					title: "操作警告",
-// 					message: `您确定要禁用所选的 [ ${selectedUid.length} ] 个用户吗`,
+// 					message: `您确定要禁用所选的 [ ${selected_id.length} ] 个用户吗`,
 // 				})
 // 				.then(() => {
-// 					proxy.$request(proxy.$apis.usersUpdateMany, { uid: selectedUid, status: false }).then((res: any) => {
+// 					proxy.$request(proxy.$apis.usersUpdateMany, { _id: selected_id, status: false }).then((res: any) => {
 // 						if (res.code == 200) {
 // 							proxy.$parent.query();
 // 							proxy.$message({
@@ -240,14 +240,14 @@ export function topOptions(proxy:any):BatchButton[]{
 // 	{
 // 		label: "批量启用",
 // 		action: (selected, proxy) => {
-// 			const selectedUid = selected.map((item: Record<string, any>) => item.uid);
+// 			const selected_id = selected.map((item: Record<string, any>) => item._id);
 // 			proxy
 // 				.$confirm({
 // 					title: "操作警告",
-// 					message: `您确定要启用所选的 [ ${selectedUid.length} ] 个用户吗`,
+// 					message: `您确定要启用所选的 [ ${selected_id.length} ] 个用户吗`,
 // 				})
 // 				.then(() => {
-// 					proxy.$request(proxy.$apis.usersUpdateMany, { uid: selectedUid, status: true }).then((res: any) => {
+// 					proxy.$request(proxy.$apis.usersUpdateMany, { _id: selected_id, status: true }).then((res: any) => {
 // 						if (res.code == 200) {
 // 							proxy.$parent.query();
 // 							proxy.$message({
@@ -279,7 +279,7 @@ export const tableConfig: {
 			size:"large",
 			emptyText: "暂无数据",
 			stripe: true,
-			rowKey: "uid",
+			rowKey: "_id",
 			cellClassName: ({ row, rowIndex }) => {
 				return rowIndex % 2 == 1 ? "dark:bg-[#1d2534] bg-white" : "dark:bg-[#2b2e3c] bg-gray-100";
 			},
@@ -295,8 +295,8 @@ export const tableConfig: {
 			}
 		},
 		// {
-		// 	label: "UID",
-		// 	prop: "uid",
+		// 	label: "_id",
+		// 	prop: "_id",
 		// 	fixed: "left",
 		// 	minWidth: "120px",
 		// 	formatter: (row, column, value, index) => {
@@ -396,8 +396,8 @@ export const tableConfig: {
 			align: "center",
 			showOverflowTooltip: false,
 			formatter: oprationFormatter((row, column, value, inxe) => {
-				return userStore.getInfo.super > row.super && row.uid!=userStore.getInfo.uid ? options.filter(item=>item.label !== "查看") : 
-				row.uid == userStore.getInfo.uid ?
+				return userStore.getInfo.super > row.super && row._id!=userStore.getInfo._id ? options.filter(item=>item.label !== "查看") : 
+				row._id == userStore.getInfo._id ?
 				options.filter((item) => ['编辑'].includes(item.label)) : options.filter((item) => ['查看'].includes(item.label))
 			}, proxy),
 		},
