@@ -2,6 +2,7 @@ import * as R from "ramda";
 import type { DrawerFormProps } from "@typs/app-public";
 import type { VXF_JSON } from "vmo-x-form";
 import { request, apis } from "@src/apis";
+import { put } from "@vercel/blob/client";
 import { useUserStore } from "@src/stores";
 const userStore = useUserStore();
 const publicLabelClass = "w-[90px] flex-row items-center justify-end !mr-[10px]";
@@ -73,24 +74,34 @@ export default {
 				autoCompression: true,
 				sizeLimit: 20 * 1024,
 				keepFileTypeAfterAutoCompression: true,
+				prefix:"",
 				uploadProps: {
 					multiple: false,
 					limit: 1,
 					httpRequest: async (options) => {
-						const data = new FormData();
-						data.append("file", options.file);
-						data.append("path", "avatar");
-						return new Promise((resolve, reject) => {
-							request(apis.upload, data, {}).then((res) => {
-								if (res.code == 200) {
-									resolve(res.data?.[0]?.accessPath);
-								} else {
-									reject(res);
-								}
+						try {
+							// 1. 获取上传凭证 (自动携带 Auth Token)
+							const tokenRes = await request(apis.uploadToken, {
+								pathname: options.file.name
+							}, {});
+							if (tokenRes.code !== 200 || !tokenRes.data?.clientToken) {
+								throw new Error(tokenRes.msg || 'Failed to get upload token');
+							}
+							// 2. 使用凭证直传 Vercel Blob
+							const newBlob = await put(options.file.name, options.file, {
+								access: 'public',
+								token: tokenRes.data.clientToken, // 使用获取到的客户端 Token
 							});
-						}).catch((err) => {
-							console.log(err);
-						});
+							console.log('Vercel Blob Upload Success:', newBlob.url);
+							// 兼容部分 Upload 组件需要手动调用 onSuccess
+							if (options.onSuccess) {
+								options.onSuccess(newBlob.url);
+							}
+							return Promise.resolve(newBlob.url);
+						} catch (error) {
+							console.error('Upload failed:', error);
+							return Promise.reject(error);
+						}
 					},
 				},
 			},
