@@ -3,7 +3,7 @@ import type { ApiRecord } from "vmo-umi-request";
 const api: ApiRecord<string> = {
 	usersPubRegister: {
 		name: "用户注册",
-		url: "/users/pub/register",
+		url: "/users/register/pub",
 		// axios 配置
 		requestConfig: {
 			method: "POST",
@@ -14,7 +14,7 @@ const api: ApiRecord<string> = {
 	},
 	usersPubLogin: {
 		name: "管理员登录",
-		url: "/users/pub/login",
+		url: "/users/login/pub",
 		// axios 配置
 		requestConfig: {
 			middle: "/pub/",
