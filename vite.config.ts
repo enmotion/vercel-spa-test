@@ -72,6 +72,29 @@ export default ({ mode }: { mode: any }) => {
 					//   });
 					// },
 				},
+				"/files": {
+					target: "https://xdfc5jonbvzcnj38.public.blob.vercel-storage.com", // 代理地址
+					changeOrigin: true,
+					ws: true,
+					rewrite: (path) => path.replace(/^\/files/, ""),
+					// selfHandleResponse:true,
+					// configure:(proxy,_options)=>{
+					//   proxy.on('proxyRes', (proxyRes, req, res) => {
+					//     if(req.url.split('?')[0].split('/').pop() == 'xhr_streaming'){
+					//       // console.log(res,'ddddd');
+					//       console.log(res.hasHeader,res.getHeaders());
+					//       res.removeHeader("Connection");
+					//       res.removeHeader('Origin');
+					//       res.setHeader("Origin","");
+					//       res.setHeader("Upgrade","websocket");
+					//       res.setHeader("Connection","upgrade");
+					//       proxyRes.pipe(res);
+					//       //
+					//     }
+					//     proxyRes.pipe(res)
+					//   });
+					// },
+				},
 				// '/socketio': {
 				//   target: 'ws://192.168.2.2:18180', // 获取环境变量接口代理地址
 				//   changeOrigin: true,

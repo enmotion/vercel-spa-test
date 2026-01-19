@@ -63,7 +63,7 @@
 					/>
 				</div>
 				<vmo-user class="w-[230px] bg-light-32 dark:bg-dark-4 px-[20px] border-b border-dark-4 dark:border-light-4"
-					:avatar="'/api' + userStore.getInfo.avatar"
+					:avatar="'/files/' + userStore.getInfo.avatar"
 					:name="userStore?.getInfo?.nickname ?? userStore?.getInfo?.username"
 					:info="userStore.getInfo?.username"
 					:collapsed="true"

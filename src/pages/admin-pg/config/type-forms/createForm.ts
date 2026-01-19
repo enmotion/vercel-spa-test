@@ -74,30 +74,35 @@ export default {
 				autoCompression: true,
 				sizeLimit: 20 * 1024,
 				keepFileTypeAfterAutoCompression: true,
-				prefix:"",
+				prefix:"/files/",
 				uploadProps: {
 					multiple: false,
 					limit: 1,
 					httpRequest: async (options) => {
 						try {
+							// 生成安全的文件名：目录 + UUID + 原始扩展名
+							const ext = options.file.name.split('.').pop() || 'bin';
+							const safeFilename = `avatars/${crypto.randomUUID()}.${ext}`;
+							
 							// 1. 获取上传凭证 (自动携带 Auth Token)
 							const tokenRes = await request(apis.uploadToken, {
-								pathname: options.file.name
+								pathname: safeFilename
 							}, {});
 							if (tokenRes.code !== 200 || !tokenRes.data?.clientToken) {
 								throw new Error(tokenRes.msg || 'Failed to get upload token');
 							}
 							// 2. 使用凭证直传 Vercel Blob
-							const newBlob = await put(options.file.name, options.file, {
+							const newBlob = await put(safeFilename, options.file, {
 								access: 'public',
 								token: tokenRes.data.clientToken, // 使用获取到的客户端 Token
 							});
-							console.log('Vercel Blob Upload Success:', newBlob.url);
+							console.log('Vercel Blob Upload Success:', newBlob.pathname);
 							// 兼容部分 Upload 组件需要手动调用 onSuccess
+							// 使用 pathname 作为相对路径，通过后端 proxy 接口访问
 							if (options.onSuccess) {
-								options.onSuccess(newBlob.url);
+								options.onSuccess(newBlob.pathname);
 							}
-							return Promise.resolve(newBlob.url);
+							return Promise.resolve(newBlob.pathname);
 						} catch (error) {
 							console.error('Upload failed:', error);
 							return Promise.reject(error);
