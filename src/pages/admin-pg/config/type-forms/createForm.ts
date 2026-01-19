@@ -55,7 +55,7 @@ export default {
 				layout: "horizontal",
 				class: "my-0",
 				grid: {
-					col: 2,
+					col: 3,
 					row: 3,
 				},
 				props: {
@@ -72,7 +72,7 @@ export default {
 				lineRows: 1,
 				placeholder: "",
 				autoCompression: true,
-				sizeLimit: 20 * 1024,
+				sizeLimit: 9 * 1024 * 1024,
 				keepFileTypeAfterAutoCompression: true,
 				prefix:"/files/",
 				uploadProps: {
@@ -118,7 +118,7 @@ export default {
 				layout: "horizontal",
 				class: "my-0",
 				grid: {
-					col: 10,
+					col: 9,
 					row: 1,
 				},
 				props: {
@@ -161,7 +161,7 @@ export default {
 				layout: "horizontal",
 				class: "my-0",
 				grid: {
-					col: 10,
+					col: 9,
 					row: 1,
 				},
 				props: {
@@ -204,7 +204,7 @@ export default {
 				layout: "horizontal",
 				class: "my-0",
 				grid: {
-					col: 10,
+					col: 9,
 					row: 1,
 				},
 				props: {
