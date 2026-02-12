@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/files/:path*",
-      "destination": "https://xdfc5jonbvzcnj38.public.blob.vercel-storage.com/:path*"
+      "destination": "https://kyatjmmxdq8crwqo.public.blob.vercel-storage.com/:path*"
     },
     {
       "source": "/api/:match*",

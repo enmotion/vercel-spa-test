@@ -73,7 +73,7 @@ export default ({ mode }: { mode: any }) => {
 					// },
 				},
 				"/files": {
-					target: "https://xdfc5jonbvzcnj38.public.blob.vercel-storage.com", // 代理地址
+					target: "https://kyatjmmxdq8crwqo.public.blob.vercel-storage.com", // 代理地址
 					changeOrigin: true,
 					ws: true,
 					rewrite: (path) => path.replace(/^\/files/, ""),
