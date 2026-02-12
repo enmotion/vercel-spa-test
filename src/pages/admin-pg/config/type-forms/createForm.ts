@@ -72,7 +72,7 @@ export default {
 				lineRows: 1,
 				placeholder: "",
 				autoCompression: true,
-				sizeLimit: 9 * 1024 * 1024,
+				sizeLimit: 0.5 * 1024 * 1024,
 				keepFileTypeAfterAutoCompression: true,
 				prefix:"/files/",
 				uploadProps: {
