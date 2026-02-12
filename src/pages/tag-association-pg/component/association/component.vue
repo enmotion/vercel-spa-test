@@ -187,7 +187,7 @@ export default defineComponent({
 			const datas = listData.value.items.map((item:Record<string,any>)=>{
 				return {
 					_id:item?._id,
-					label:`${item?.tagInfo?.[0]?.name} : ${item?.tagId} `,
+					label:`${item?.tagInfo?.name} : ${item?.tagId} `,
 					value:item?.tagId,
 					order:item?.order,
 					parent:item?.parentAssociationId

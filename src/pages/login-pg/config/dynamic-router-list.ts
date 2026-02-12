@@ -72,7 +72,74 @@ export const userMenuSampleData: VmoRouteMenuItemRaw<{ label: string; icon: stri
 					},
 				},
 			},
-		}
+		},
+		{
+			label: "内容中心",
+			icon: "iconfont vmo-icon-target_line",
+			key: "content-center",
+			children: [
+				{
+					label: "分类管理",
+					icon: "iconfont vmo-icon-target_line",
+					key: "category-pg",
+					to: {
+						name: "category-pg",
+						template: {
+							pageKey: "CategoryPg",
+							parent: "main-pg",
+							route: {
+								path: "/category-pg",
+								meta: {
+									keepAlive: true,
+									tokenRequire: true,
+									pageName: "分类管理",
+								},
+							},
+						},
+					},
+				},
+				{
+					label: "标签管理",
+					icon: "iconfont vmo-icon-target_line",
+					key: "tag-pg",
+					to: {
+						name: "tag-pg",
+						template: {
+							pageKey: "TagPg",
+							parent: "main-pg",
+							route: {
+								path: "/tag-pg",
+								meta: {
+									keepAlive: true,
+									tokenRequire: true,
+									pageName: "标签管理",
+								},
+							},
+						},
+					},
+				},
+				{
+					label: "标签关联",
+					icon: "iconfont vmo-icon-target_line",
+					key: "tag-association-pg",
+					to: {
+						name: "tag-association-pg",
+						template: {
+							pageKey: "TagAssociationPg",
+							parent: "main-pg",
+							route: {
+								path: "/tag-association-pg",
+								meta: {
+									keepAlive: true,
+									tokenRequire: true,
+									pageName: "标签关联",
+								},
+							},
+						},
+					},
+				},
+			],
+		},
 	]
 }
 // 	{

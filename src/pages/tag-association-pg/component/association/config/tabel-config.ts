@@ -110,7 +110,7 @@ export const tableConfig: {
 			invisible:true,
 			formatter: (row, column, value, index) => {
 				console.log(value)
-				return (!!value && Array.isArray(value) && value.length > 0) ? `${value[0].name} : ${row.categoryId}`: "-";
+				return value.name ?? value.key ?? `-`
 			},
 		},
 		{
@@ -119,7 +119,7 @@ export const tableConfig: {
 			minWidth: "140px",
 			fixed: "left",
 			formatter: (row, column, value, index) => {
-				const label = (!!value && Array.isArray(value) && value.length > 0) ? `${value[0].name}` : `-`
+				const label = value.name ?? `-`
 				const key = row.tagId
 				return `${label} : ${key}`
 			},
@@ -129,7 +129,7 @@ export const tableConfig: {
 			prop: "parentAssociationInfo",
 			minWidth: "140px",
 			formatter: (row, column, value, index) => {
-				const label = (!!value && Array.isArray(value) && value.length > 0) ? `${value[0].name}` : `-`
+				const label = value?.name?? '-'
 				const key = row.parentAssociationId || '-'
 				return label!='-' || key!='-'? (`${label} : ${key}`) : "-"
 			},

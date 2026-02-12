@@ -1,20 +1,25 @@
 <template>
-	<div class="flex-row">
-		<category-component class="mr-[10px] w-1/3 last:mr-[0px]"
-			@update="associationKey++"
-		/>
-		<association-component 
-			ref="associationRef" 
-			class="grow-1 shrink-1 mr-[10px] last:mr-[0px]"
-			:key="associationKey"
-		/>		
-		<tag-component 
-		
-			class="mr-[10px] w-1/3 last:mr-[0px]"
-			@update="()=>{
-				associationRef.query()
-			}"
-		/>
+	<div class="flex-row flex-wrap">
+		<div class="flex-row w-full grow-2 mb-[10px] xl:mb-[0px] xl:w-[0px] xl:mr-[10px] xl:last:mr-[0px]">
+			<category-component class="grow-1 shrink-1"
+				@update="associationKey++"
+			/>
+		</div>
+		<div class="flex-row w-full grow-1 xl:w-[200px] mb-[10px] xl:mb-[0px] xl:mr-[10px] xl:last:mr-[0px]">
+			<association-component 
+				ref="associationRef" 
+				class="grow-1 shrink-1 !w-0"
+				:key="associationKey"
+			/>		
+		</div>
+		<div class="flex-row w-full grow-2 mb-[10px] xl:mb-[0px] xl:w-[0px] xl:mr-[10px] xl:last:mr-[0px]">
+			<tag-component 
+				class="grow-1 shrink-1 !w-0"
+				@update="()=>{
+					associationRef.query()
+				}"
+			/>
+		</div>
 		<el-drawer 
 			v-model="showDrawer"
 			v-if="!!computedCurrentDrawerFormProps"
