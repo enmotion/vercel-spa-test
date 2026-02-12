@@ -7,7 +7,7 @@ import packToken from "./pipes/packToken"; // 引入TOKEN打包 中间件
 // const pud_host = import.meta.env.VITE_APP_API_BASE_URL;
 const host = import.meta.env.VITE_APP_API_BASE_URL; // 打包时自动切换地址
 const wsst = "wss://www.xxxxxxx.cn:81"; //socket地址
-
+console.log(1111111)
 const VUR = new VmoUmiRequest({
 	prefix: host,
 	method: "POST",
