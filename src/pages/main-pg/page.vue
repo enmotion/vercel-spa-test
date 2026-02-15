@@ -188,20 +188,22 @@
 			<router-view class="grow-1"
 				v-slot="{ Component }"
 			>
-				<vmo-transition name="falling"
-					mode="out-in"
-					class="grow-1 flex-col overflow-hidden"
-					:duration="{ enter: 200, leave: 200 }"
-					:timing="{ enter: 'ease-out', leave: 'ease-out' }"
-					:disabled="appStore.getMicroAppEnvironment"
-				>
-					<keep-alive :include="keepAliveStore.getNames">
-						<component :is="Component"
-							:key="route.path"
-							class="w-full h-full p-20 bg-gray-100 dark:bg-gray-900"
-						/>
-					</keep-alive>
-				</vmo-transition>
+				<vmo-scroll class="grow-1 flex">
+					<vmo-transition name="falling"
+						mode="out-in"
+						class="grow-1 flex-col overflow-hidden"
+						:duration="{ enter: 200, leave: 200 }"
+						:timing="{ enter: 'ease-out', leave: 'ease-out' }"
+						:disabled="appStore.getMicroAppEnvironment"
+					>
+						<keep-alive :include="keepAliveStore.getNames">
+							<component :is="Component"
+								:key="route.path"
+								class="w-full h-full p-20 bg-gray-100 dark:bg-gray-900"
+							/>
+						</keep-alive>
+					</vmo-transition>
+				</vmo-scroll>
 			</router-view>
 		</div>
 	</div>

@@ -2,7 +2,37 @@
 	<!-- 定义一个 Element Plus 的表格组件 -->
 	<div class="vmo-table">
 		<div class="header-row">
-			<div class="cell">
+			<el-popover
+				v-if="!appStore.getScreen.isWideScreen"
+				placement="left"
+				:width="100"
+				trigger="click"
+			>
+				<template #reference>
+					<div
+						:class="['iconfont','vmo-icon-gearwheel_line','reference']"
+					>
+					</div>
+				</template>
+				<div class="text-base mb-[10px]">
+					表格操作
+				</div>
+				<div class="flex flex-col">
+					<el-button 
+						v-for="(item,index) in computedBatchOptions" 
+						:key="item.label"
+						v-bind="item"
+						size="default"
+						@click="batchOptionsOnClick(item)"
+					>
+						{{ item.label }}
+					</el-button>
+				</div>
+			</el-popover>
+			<div 
+				v-if="appStore.getScreen.isWideScreen" 
+				class="cell"
+			>
 				<el-button 
 					v-for="(item,index) in computedBatchOptions" 
 					:key="item.label"
@@ -146,6 +176,7 @@ import type { PropType, StyleValue } from "vue";
 import { ElTable, ElTableColumn, ElPopover, ElCheckbox } from "element-plus";
 import type { VmoTable } from "@src/comps/common/vmo-table/types";
 import { resize } from "@src/use.lib/publicDirectives";
+import { useAppStore } from "@src/stores";
 
 import type { ButtonProps, TagProps } from "element-plus";
 import type { Mutable } from "element-plus/es/utils/typescript";
@@ -303,6 +334,7 @@ export default defineComponent({
 		const vesselHeight = ref(0);
 		// 操作防抖
 		const debounceTimer = ref(null as any);
+		const appStore = useAppStore();
 		// 是否是加载状态
 		const isLoading = ref(false);
 		// 定义表格实例的引用
@@ -425,6 +457,7 @@ export default defineComponent({
 			tableData,
 			ElTableRef,
 			computedProps,
+			appStore,
 			computedBatchOptions,
 			tableColumns,
 			computedColumns,

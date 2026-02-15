@@ -189,8 +189,8 @@ const formProps:VXF_JSON.CompProp<{}>={
 				console.log("sssss",res)
 				if(res.code == 200){
 					props.data = res.data.items.map((item:Record<string,any>)=>({
-						label:item.tagInfo?.[0]?.name,
-						value:item.tagInfo?.[0]?.key
+						label:item.tagInfo?.name,
+						value:item.tagInfo?.key
 					}))
 				}
 				return props
