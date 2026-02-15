@@ -1,18 +1,19 @@
 <template>
 	<div class="flex-row flex-wrap">
-		<div class="flex-row w-full grow-2 mb-[10px] xl:mb-[0px] xl:w-[0px] xl:mr-[10px] xl:last:mr-[0px]">
-			<category-component class="grow-1 shrink-1"
+		<div class="flex-row w-full min-h-[600px] grow-2 mb-[10px] xl:mb-[0px] xl:w-[0px] xl:mr-[10px] xl:last:mr-[0px]">
+			<category-component 
+				class="grow-1 shrink-1"
 				@update="associationKey++"
 			/>
 		</div>
-		<div class="flex-row w-full grow-1 xl:w-[200px] mb-[10px] xl:mb-[0px] xl:mr-[10px] xl:last:mr-[0px]">
+		<div class="flex-row w-full min-h-[600px] grow-1 xl:w-[200px] mb-[10px] xl:mb-[0px] xl:mr-[10px] xl:last:mr-[0px]">
 			<association-component 
 				ref="associationRef" 
 				class="grow-1 shrink-1 !w-0"
 				:key="associationKey"
 			/>		
 		</div>
-		<div class="flex-row w-full grow-2 mb-[10px] xl:mb-[0px] xl:w-[0px] xl:mr-[10px] xl:last:mr-[0px]">
+		<div class="flex-row w-full min-h-[600px] grow-2 mb-[10px] xl:mb-[0px] xl:w-[0px] xl:mr-[10px] xl:last:mr-[0px]">
 			<tag-component 
 				class="grow-1 shrink-1 !w-0"
 				@update="()=>{

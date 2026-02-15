@@ -8,60 +8,60 @@
 				:show-message="false"
 				:model="reqdata"
 			>
-				<el-form-item :prop="formJson.username.key"
-					:rules="formJson.username.rules"
+				<el-form-item :prop="computedFormJson.username.key"
+					:rules="computedFormJson.username.rules"
 					class="my-0 mb-10 last:mb-0"
 				>
-					<el-input v-model="reqdata[formJson.username.key]"
-						:type="formJson.username.type"
-						:size="formJson.username.size"
-						:placeholder="formJson.username.placeholder"
+					<el-input v-model="reqdata[computedFormJson.username.key]"
+						:type="computedFormJson.username.type"
+						:size="computedFormJson.username.size"
+						:placeholder="computedFormJson.username.placeholder"
 					>
 						<template #prefix>
-							<span :class="['iconfont', formJson.username.icon]"></span>
+							<span :class="['iconfont', computedFormJson.username.icon]"></span>
 						</template>
 					</el-input>
 				</el-form-item>
-				<el-form-item :prop="formJson.password.key"
-					:rules="formJson.password.rules"
+				<el-form-item :prop="computedFormJson.password.key"
+					:rules="computedFormJson.password.rules"
 					class="my-0 mb-10 last:mb-0"
 				>
-					<el-input v-model="reqdata[formJson.password.key]"
-						:type="formJson.password.type"
-						:size="formJson.password.size"
-						:placeholder="formJson.password.placeholder"
+					<el-input v-model="reqdata[computedFormJson.password.key]"
+						:type="computedFormJson.password.type"
+						:size="computedFormJson.password.size"
+						:placeholder="computedFormJson.password.placeholder"
 					>
 						<template #prefix>
-							<span :class="['iconfont', formJson.password.icon]"></span>
+							<span :class="['iconfont', computedFormJson.password.icon]"></span>
 						</template>
 					</el-input>
 				</el-form-item>
-				<el-form-item :prop="formJson.repeatpw.key"
-					:rules="formJson.repeatpw.rules"
+				<el-form-item :prop="computedFormJson.repeatpw.key"
+					:rules="computedFormJson.repeatpw.rules"
 					class="my-0 mb-10 last:mb-0"
 				>
-					<el-input v-model="reqdata[formJson.repeatpw.key]"
-						:type="formJson.repeatpw.type"
-						:size="formJson.repeatpw.size"
-						:placeholder="formJson.repeatpw.placeholder"
+					<el-input v-model="reqdata[computedFormJson.repeatpw.key]"
+						:type="computedFormJson.repeatpw.type"
+						:size="computedFormJson.repeatpw.size"
+						:placeholder="computedFormJson.repeatpw.placeholder"
 					>
 						<template #prefix>
-							<span :class="['iconfont', formJson.repeatpw.icon]"></span>
+							<span :class="['iconfont', computedFormJson.repeatpw.icon]"></span>
 						</template>
 					</el-input>
 				</el-form-item>
 				<div class="flex-row mb-10 last:mb-0">
-					<el-form-item :prop="formJson.validate.key"
-						:rules="formJson.validate.rules"
+					<el-form-item :prop="computedFormJson.validate.key"
+						:rules="computedFormJson.validate.rules"
 						class="my-0 grow-1"
 					>
-						<el-input v-model="reqdata[formJson.validate.key]"
-							:type="formJson.validate.type"
-							:size="formJson.validate.size"
-							:placeholder="formJson.validate.placeholder"
+						<el-input v-model="reqdata[computedFormJson.validate.key]"
+							:type="computedFormJson.validate.type"
+							:size="computedFormJson.validate.size"
+							:placeholder="computedFormJson.validate.placeholder"
 						>
 							<template #prefix>
-								<span :class="['iconfont', formJson.validate.icon]"></span>
+								<span :class="['iconfont', computedFormJson.validate.icon]"></span>
 							</template>
 						</el-input>
 					</el-form-item>
@@ -102,8 +102,9 @@
 
 <script lang="ts">
 import { keys } from "ramda";
-import { defineComponent, ref, getCurrentInstance } from "vue";
+import { defineComponent, ref, getCurrentInstance, computed } from "vue";
 import { ElForm, ElFormItem } from "element-plus";
+import { useAppStore } from "@src/stores";
 
 export default defineComponent({
 	name: "reset-password",
@@ -113,56 +114,60 @@ export default defineComponent({
 		const { proxy } = getCurrentInstance() as { proxy: any };
 		const reqdata = ref({} as any);
 		const ReqDataFormRef = ref(null as any);
-		const formJson = ref({
-			username: {
-				key: "username",
-				type: "text",
-				icon: "vmo-icon-user",
-				placeholder: "登录账户",
-				size: "default",
-				rules: {
-					required: true,
-					message: "账号不可为空",
-				},
-			},
-			password: {
-				key: "password",
-				type: "password",
-				icon: "vmo-icon-lock",
-				placeholder: "登录密码",
-				size: "default",
-				rules: {
-					required: true,
-					message: "密码不可为空",
-				},
-			},
-			repeatpw: {
-				key: "password",
-				type: "password",
-				icon: "vmo-icon-lock",
-				placeholder: "重复密码",
-				size: "default",
-				rules: {
-					validator(rule: any, value: string, callback: Function) {
-						if (value == reqdata.value.password) {
-							callback()
-						} else {
-							callback(new Error("重复密码不等于密码"))
-						}
+		const appStore = useAppStore()
+		const computedFormJson = computed(()=>{
+			const size = appStore.getScreen.isWideScreen?"default":"large";
+			return {
+				username: {
+					key: "username",
+					type: "text",
+					icon: "vmo-icon-user",
+					placeholder: "登录账户",
+					size,
+					rules: {
+						required: true,
+						message: "账号不可为空",
 					},
 				},
-			},
-			validate: {
-				key: "validate",
-				type: "text",
-				icon: "vmo-icon-security",
-				placeholder: "验证码",
-				size: "default",
-				rules: {
-					required: true,
-					message: "验证码不可为空",
+				password: {
+					key: "password",
+					type: "password",
+					icon: "vmo-icon-lock",
+					placeholder: "登录密码",
+					size,
+					rules: {
+						required: true,
+						message: "密码不可为空",
+					},
 				},
-			},
+				repeatpw: {
+					key: "password",
+					type: "password",
+					icon: "vmo-icon-lock",
+					placeholder: "重复密码",
+					size,
+					rules: {
+						validator(rule: any, value: string, callback: Function) {
+							if (value == reqdata.value.password) {
+								callback()
+							} else {
+								callback(new Error("重复密码不等于密码"))
+							}
+						},
+					},
+				},
+				validate: {
+					key: "validate",
+					type: "text",
+					icon: "vmo-icon-security",
+					placeholder: "验证码",
+					size,
+					rules: {
+						required: true,
+						message: "验证码不可为空",
+					},
+				},
+			}
 		});
 		function submit() {
 			ReqDataFormRef.value
@@ -185,7 +190,7 @@ export default defineComponent({
 		// console.log(Key)
 		return {
 			context,
-			formJson,
+			computedFormJson,
 			reqdata,
 			ReqDataFormRef,
 			submit,

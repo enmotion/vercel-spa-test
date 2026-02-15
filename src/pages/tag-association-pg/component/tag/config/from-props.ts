@@ -7,10 +7,10 @@ import { VmoTree } from "vmo-tree";
 export const drawerFormProps: DrawerFormProps<{}> = {
 	create: {
 		drawer: {
-			title: "创建标签",
+			title: "创建标签2",
 			size: "60%",
 			class: "rounded-l",
-			appendToBody: false,
+			appendToBody: true,
 			bodyClass: "flex-col grow-1",
 			destroyOnClose: true,
 		},

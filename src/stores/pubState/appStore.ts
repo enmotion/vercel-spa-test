@@ -31,7 +31,7 @@ export declare namespace APP {
 export const useAppStore = defineStore("AppSate", {
 	state: (): APP.State => ({
 		rootInstance: null,
-    envMode:'devlopment',
+		envMode:'devlopment',
 		info: {
 			icon: "",
 			logo: "",
@@ -52,8 +52,7 @@ export const useAppStore = defineStore("AppSate", {
 		subApps: JSON.parse(import.meta.env.VITE_APP_SUB_APP_LIST),
 	}),
 	getters: {
-    // @ts-ignore
-    getIsDevMode:()=>process.env.mode,
+		getIsDevMode:()=>process.env.mode,
 		getRootInstance: (state) => state.rootInstance,
 		getScreen: (state) =>
 			mergeDeepRight(omit(["breakPoint"], state.screen), {

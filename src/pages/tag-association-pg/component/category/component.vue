@@ -44,7 +44,6 @@
 			v-if="!!computedCurrentDrawerFormProps"
 			v-bind="computedCurrentDrawerFormProps.drawer"
 		>
-			<!-- {{itemData}} -->
 			<div class="flex-col grow-1">
 				<vmo-x-form ref="formRef"
 					v-model="itemData"

@@ -9,42 +9,42 @@
 				:model="reqdata"
 			>
 				<el-form-item
-					:prop="formJson.name.key"
-					:rules="formJson.name.rules"
+					:prop="computedFormJson.name.key"
+					:rules="computedFormJson.name.rules"
 					class="my-0 mb-10 last:mb-0"
 				>
 					<el-input
-						v-model="reqdata[formJson.name.key]"
-						:type="formJson.name.type"
-						:size="formJson.name.size"
-						:placeholder="formJson.name.placeholder"
+						v-model="reqdata[computedFormJson.name.key]"
+						:type="computedFormJson.name.type"
+						:size="computedFormJson.name.size"
+						:placeholder="computedFormJson.name.placeholder"
 					>
 						<template #prefix>
-							<span :class="['iconfont', formJson.name.icon]"></span>
+							<span :class="['iconfont', computedFormJson.name.icon]"></span>
 						</template>
 					</el-input>
 				</el-form-item>
 				<el-form-item
-					:prop="formJson.password.key"
-					:rules="formJson.password.rules"
+					:prop="computedFormJson.password.key"
+					:rules="computedFormJson.password.rules"
 					class="my-0 mb-10 last:mb-0"
 				>
 					<el-input
-						v-model="reqdata[formJson.password.key]"
-						:type="formJson.password.type"
-						:size="formJson.password.size"
-						:placeholder="formJson.password.placeholder"
+						v-model="reqdata[computedFormJson.password.key]"
+						:type="computedFormJson.password.type"
+						:size="computedFormJson.password.size"
+						:placeholder="computedFormJson.password.placeholder"
 					>
 						<template #prefix>
-							<span :class="['iconfont', formJson.password.icon]"></span>
+							<span :class="['iconfont', computedFormJson.password.icon]"></span>
 						</template>
 					</el-input>
 				</el-form-item>
 				<!-- <div class="flex-row mb-10 last:mb-0">
-          <el-form-item :prop="formJson.validate.key" :rules="formJson.validate.rules" class="my-0 grow-1">
-            <el-input v-model="reqdata[formJson.validate.key]" :type="formJson.validate.type" :size="formJson.validate.size" :placeholder="formJson.validate.placeholder">
+          <el-form-item :prop="computedFormJson.validate.key" :rules="computedFormJson.validate.rules" class="my-0 grow-1">
+            <el-input v-model="reqdata[computedFormJson.validate.key]" :type="computedFormJson.validate.type" :size="computedFormJson.validate.size" :placeholder="computedFormJson.validate.placeholder">
               <template #prefix>
-                <span :class="['iconfont', formJson.validate.icon]"></span>
+                <span :class="['iconfont', computedFormJson.validate.icon]"></span>
               </template>
             </el-input>
           </el-form-item>
@@ -84,8 +84,9 @@
 
 <script lang="ts">
 import { keys, mergeAll } from "ramda";
-import { defineComponent, ref, getCurrentInstance } from "vue";
+import { defineComponent, ref, getCurrentInstance, computed } from "vue";
 import { ElForm, ElFormItem } from "element-plus";
+import { useAppStore } from "@src/stores";
 
 export default defineComponent({
 	components: { ElForm, ElFormItem },
@@ -94,40 +95,44 @@ export default defineComponent({
 		const { proxy } = getCurrentInstance() as { proxy: any };
 		const reqdata = ref({} as any);
 		const ReqDataFormRef = ref(null as any);
-		const formJson = ref({
-			name: {
-				key: "name",
-				type: "text",
-				icon: "vmo-icon-user",
-				placeholder: "登录账户",
-				size: "default",
-				rules: {
-					required: true,
-					message: "账号不可为空",
+		const appStore = useAppStore()
+		const computedFormJson = computed(()=>{
+			const size = appStore.getScreen.isWideScreen?"default":"large";
+			return {
+				name: {
+					key: "name",
+					type: "text",
+					icon: "vmo-icon-user",
+					placeholder: "登录账户",
+					size,
+					rules: {
+						required: true,
+						message: "账号不可为空",
+					},
 				},
-			},
-			password: {
-				key: "password",
-				type: "password",
-				icon: "vmo-icon-lock",
-				placeholder: "登录密码",
-				size: "default",
-				rules: {
-					required: true,
-					message: "密码不可为空",
+				password: {
+					key: "password",
+					type: "password",
+					icon: "vmo-icon-lock",
+					placeholder: "登录密码",
+					size,
+					rules: {
+						required: true,
+						message: "密码不可为空",
+					},
 				},
-			},
-			validate: {
-				key: "validate",
-				type: "text",
-				icon: "vmo-icon-security",
-				placeholder: "验证码",
-				size: "default",
-				rules: {
-					required: true,
-					message: "验证码不可为空",
+				validate: {
+					key: "validate",
+					type: "text",
+					icon: "vmo-icon-security",
+					placeholder: "验证码",
+					size,
+					rules: {
+						required: true,
+						message: "验证码不可为空",
+					},
 				},
-			},
+			}
 		});
 		function submit() {
 			ReqDataFormRef.value
@@ -153,7 +158,7 @@ export default defineComponent({
 		// console.log(Key)
 		return {
 			context,
-			formJson,
+			computedFormJson,
 			reqdata,
 			ReqDataFormRef,
 			submit,
